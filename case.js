@@ -51,7 +51,7 @@ halo ${pushname}, ini adalah polosan bot, jadi fiturnya sedikit.
 break
 case "ai":{
 if (!text) return m.reply(`_.ai prompt_`)
-let {data} = await axios.get("https://itzpire.site/ai/gpt-web?q=" + text); // api miftah api ku mati soalnya :v
+let {data} = await axios.get("https://api.mininxd.my.id/gemini/?q=" + text); // api miftah api ku mati soalnya :v
 m.reply(data.result);
 }
 break
