@@ -46,6 +46,7 @@ halo ${pushname}, ini adalah polosan bot, jadi fiturnya sedikit.
 
 > Menu
 ~ .ai
+~ .play
 `)
 }
 break
@@ -53,6 +54,33 @@ case "ai":{
 if (!text) return m.reply(`_.ai prompt_`)
 let {data} = await axios.get("https://api.mininxd.my.id/gemini/?q=" + text); 
 m.reply(data.result);
+}
+break
+    case "play":{
+if (!q) return m.reply(`🚩 *Contoh:* ${prefix+command} Seventeen JKT48`)
+let yts = require('yt-search')
+let search = await yts(text)
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+let a = `💸Duration : ${anu.timestamp}\n🎉Viewers : ${anu.views}\n`
+await koy.sendMessage(m.chat, {
+text: a,
+contextInfo: {
+externalAdReply: {
+showAdAttribution: true,
+title: anu.title,
+body: anu.ago,
+thumbnailUrl: anu.image,
+sourceUrl: anu.url,
+mediaType: 1,
+renderLargerThumbnail: true
+}
+}
+}, {
+quoted: m
+})
+if (anu.seconds < 1000) {
+await ytmp3(anu.url)
+} else m.reply('durasi nya bro ke besaran')
 }
 break
 default:
